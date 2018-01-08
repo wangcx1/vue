@@ -1,0 +1,60 @@
+Vue项目笔记
+1、安装Vue  1.先检查node版本：node  -v（4版本以上）2、npm install -g vue-cli(安装vue的脚手架) 3、运行vue命令 vue  4、vue init webpack sell(创建一个项目)
+2、Vue-Router：管理路由   VUE-resource：Ajax通信
+Webpack 构建工具 打包工具   es6+eslint   eslint:es6代码风格检查工具 Vue是数据驱动页面，不能直接操作DOM元素
+Vue-resource的特点：体积小、支持主流的浏览器、支持Promise和URI Template、支持拦截器  
+在发送请求后，使用then方法来处理响应结果，then方法有两个参数，第一个参数是响应成功时的回调函数，第二个参数是响应失败的回调函数 。
+工程化  组件化 模块化   flex弹性布局  CSS stickyfooter
+3、MVVM框架 主要包括三个部分  MODEl：数据  js对象 VIEW试图 DOM    VIEWMODEL 通讯 观察者
+应用场景：针对具有复杂交互逻辑的前端应用  提供基础的架构抽象 通过Ajax数据持久化 保证前端用户体验
+4、vue.js  他是一个轻量级的MVVM框架  数据驱动+组件化的前端开发 
+5、beforecreate : 可以在这加个loading事件，在加载实例时触发
+created : 初始化完成时的事件写在这里，如在这结束loading事件，异步请求也适宜在这里调用
+mounted : 挂载元素，获取到DOM节点
+updated : 如果对数据统一处理，在这里写上相应函数
+beforeDestroy : 可以做一个确认停止事件的确认框
+nextTick : 更新数据后立即操作dom
+6、对比Angular React Vue.js更轻量，gzip后大小只有20K  Vue.js更易上手，学习曲线平稳  吸取两家之长，借鉴了angular的指令和react的组件化
+7、数据驱动：DOM是数据的一种自然映射  数据响应原理：数据改变驱动试图自动更新
+8、  组件化：扩展HTML元素，封装可重用的代码  组件设计原则：页面上每个独立的可视/可交互区域视为一个组件  每个组件对应一个工程目录，组件所需要的各种资源在这个目录下就近维护
+9、VUe-cli是Vue的脚手架工具  
+10、在创建的Vue-Router对象中，path配置了路由的路径，component配置了映射的组件       在创建的router对象中，如果不配置mode，就会使用默认的hash模式，该模式下会将路径格式化为#！开头，添加mode:’history’之后将使用HTML5history模式，该模式下没有#前缀，而且可以使用pushState和replaceState来管理记录
+11、嵌套路由：<router-view>是用来渲染通过路由映射过来的组件，当路径更改时，<router-view>中的内容也会发生更改
+12、路由对象和路由匹配   路由对象，即$router会被注入每个组件中，可以利用它进行一些信息的获取如：$route.path 当前路由对象的路径，如’/view/a’  $route.params关于动态片段（如/user/:username）的键值对信息，如{username:’sggh’}   $route.query 请求参数，如/foo?user=1获取到query.user=1  $route.router 所属路由器以及所属组件信息  $route.matched 数组，包含当前匹配的路径中所包含的所有片段所对应的配置参数对象  $route.mane  当前路径的名字
+13、Build和config目录都是webpack配置相关 node——modules  通过npm install 安装的代码库  src存放源码 static第三方静态资源
+14、Babelrc presets：表示预设，表示预先安装的插件 数值越小包含的东西越多 plugins  editorconfig 编码的配置  eslintignore:忽略语法检查的目录文件  eslint 的配置文件
+15、Ctrl+Alt+L 代码格式化
+16、Webpack打包工具：merge:合并文件 utils：文件的方法  baseconfigpack:配置方法 path：文件路径 filename:文件名称  extensions:自动补全代码后缀  fallback：找到模块  alias：别名缩短字符串的长度  preLoaders:  include:对这些文件进行检查  exclude：排除一些文件   assetsPath：devtool:做代码调试
+17、如何在手机上预览PC端的开发：保证你的手机和电脑在同一个局域网里，输入本机的地址，在草料二维码网站中生成二维码，通过手机扫描访问网站的地址
+18、Sticky footers 如果页面内容不够长的时候，页脚块会粘贴在视窗底部，如果内容够长的时候会出现滚动
+19、移动端web APP自适应布局探索与总结
+   解决方案：基于rem
+在script标签中加上如下代码：
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        var html = document.documentElement;
+        var windowWidth = html.clientWidth;
+        html.style.fontSize = windowWidth / 6.4 + 'px';
+        // 等价于html.style.fontSize = windowWidth / 640 * 100 + 'px';
+    }, false);
+})();
+注意：Font-size值是手机deviceWidth跟设计稿的比例值的100倍
+例如：一个设计稿高为140px的图标，左边距为50px
+.icon {
+    width: 1.4rem; /* 像素换算rem：140px / 100 = 1.4rem */
+    height: 1.4rem;
+    margin: 0 0 0 .5rem;
+}
+2.其他元素的字体大小该如何设置？
+@media screen and (max-width: 320px) {
+    body{font-size: 14px;}
+}
+@media screen and (min-width: 321px) and (max-width: 413px) {
+    body{font-size: 16px;}
+}
+@media screen and (min-width: 414px) and (max-width: 639px) {
+    body{font-size: 17px;}
+}
+@media screen and (min-width: 640px) {
+    body{font-size: 18px;}
+}
